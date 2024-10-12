@@ -204,6 +204,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Create an autocommand group to group related autocommands
+vim.api.nvim_create_augroup('MarkdownSettings', { clear = true })
+
+-- Set options for Markdown files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown', -- Trigger for 'markdown' file type
+  group = 'MarkdownSettings',
+  callback = function()
+    -- Set specific options for Markdown files here
+    vim.opt.tabstop = 2 -- Set tab width to 2 spaces
+    vim.opt.shiftwidth = 2 -- Set indentation width to 2 spaces
+    vim.opt.expandtab = true -- Use spaces instead of tabs
+    vim.opt.spell = true -- Enable spell checking
+    vim.opt.spelllang = 'en_us' -- Set spell checking language
+    vim.opt.conceallevel = 2
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
